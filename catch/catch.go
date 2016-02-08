@@ -1,4 +1,4 @@
-//catch is the reverse try/catch/finally. first setup all Catch and Finally blocks and the call Try.
+// Package catch is the reverse try/catch/finally. first setup all Catch and Finally blocks and the call Try.
 //
 //	t := catch.New().Catch(
 //		func(e *os.PathError) error {

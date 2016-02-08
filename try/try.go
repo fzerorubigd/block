@@ -77,6 +77,7 @@ func (b *block) Error() error {
 	return b.err
 }
 
+// New create new block
 func New(err error) Interface {
 	return &block{err: err}
 }

@@ -8,21 +8,13 @@ import (
 	. "github.com/smartystreets/goconvey/convey"
 )
 
-type MyError struct {
-	Data string
-}
-
-func (me *MyError) Error() string {
-	return me.Data
-}
-
 func TestTryCatch(t *testing.T) {
 	Convey("Test try/catch", t, func() {
 		var tmp string
 		var finCall int
 		last := New().Catch(
 			func(err *os.PathError) error {
-				panic("must not call this")
+				So(false, ShouldBeTrue)
 				return nil
 			},
 		).Finally(
@@ -36,7 +28,7 @@ func TestTryCatch(t *testing.T) {
 			},
 		).Catch(
 			func(err error) error {
-				panic("must not call this")
+				So(false, ShouldBeTrue)
 				return nil
 			},
 		).Finally(
@@ -54,7 +46,7 @@ func TestTryCatch(t *testing.T) {
 		var tmp string
 		So(New().Catch(
 			func(err *os.PathError) error {
-				panic("must not call this")
+				So(false, ShouldBeTrue)
 				return nil
 			},
 		).Catch(
