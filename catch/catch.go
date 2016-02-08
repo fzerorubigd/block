@@ -1,23 +1,32 @@
-// Package catch is a simple try catch like (not exactly same) mechanism on golang error system
-// the idea is to handle errors in a chain of function call, the goal is filter error and call
-// only functions with correct signature.
+//catch is the reverse try/catch/finally. first setup all Catch and Finally blocks and the call Try.
 //
-//  sample :
+//	t := catch.New().Catch(
+//		func(e *os.PathError) error {
+//			fmt.Println("os", e.Error())
+//			return nil
+//		},
+//	).Finally(
+//		func(e error) {
+//			fmt.Println("finally call ", e.Error())
+//		},
+//	).Catch(
+//		func(e error) error {
+//			fmt.Println("simple error", e.Error())
+//			return nil
+//		},
+//	)
 //
+//	t.Try(errors.New("string"))
 //
-//	try.New(
-//		errors.New("string"), // The first catch is ignored
-//	).Catch(func(e *os.PathError) error {
-//		fmt.Println("os path error", e.Error())
-//		return nil // Suppress error here
-//	}).Catch(func(e error) error {
-//		fmt.Println("string error", e)
-//		return e // Pass the error to next level
-//	})
+//	// re-use it.
+//	t.Try(&os.PathError{
+//		Op:   "test",
+//		Path: "test",
+//		Err:  errors.New("test")},
+//	)
 //
-//
-//  this is not exactly a try/catch mechanism.
-//
+//the finally blocks are called after all catch blocks, using defer, but there is a check and if the error is
+//not match with the finally parameter, the finally is ignored, may be I change this behavior.
 package catch
 
 import "reflect"

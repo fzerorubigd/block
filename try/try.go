@@ -1,23 +1,18 @@
-// Package catch is a simple try catch like (not exactly same) mechanism on golang error system
-// the idea is to handle errors in a chain of function call, the goal is filter error and call
-// only functions with correct signature.
-//
-//  sample :
-//
+// Package try is the simple one, more like the try/catch block and try is in the begin of the block :
 //
 //	try.New(
-//		errors.New("string"), // The first catch is ignored
-//	).Catch(func(e *os.PathError) error {
+//		err,
+//	).Catch(func(e *os.PathError) error { // if error is from this type, this function is executed
 //		fmt.Println("os path error", e.Error())
-//		return nil // Suppress error here
+//		return nil  // nil means block the chain.
 //	}).Catch(func(e error) error {
 //		fmt.Println("string error", e)
-//		return e // Pass the error to next level
-//	})
+//		return e // means the block can continue, if there is another catch in the way
+//	}).Error() // return the last executed block result.
 //
 //
-//  this is not exactly a try/catch mechanism.
-//
+//this feels like the normal try/catch, but the problem is its not re-usable unless put it in a function and call
+//that function, and also there is no way to support finally.
 package try
 
 import "reflect"

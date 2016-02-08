@@ -1,4 +1,5 @@
 # Block 
+[![Build Status](https://travis-ci.org/fzerorubigd/block.svg?branch=master)](https://travis-ci.org/fzerorubigd/block)
 
 A simple try/catch like mechanism for golang. My goal is not implement the exact try/catch model base 
 on panic, but a simple way to handle errors with less if/else in the code, especially when you need
@@ -7,7 +8,8 @@ to test the error against multiple error type.
 *every thing is just an experiment and api is going to change. I use this code in production, but I do not 
 recommend you to do the same*
 
-## try 
+## try  
+[![GoDoc](https://godoc.org/github.com/fzerorubigd/block/try?status.svg)](https://godoc.org/github.com/fzerorubigd/block/try)
 try is the simple one, more like the try/catch block and try is in the begin of the block :
 
 ```go 
@@ -28,7 +30,7 @@ that function, and also there is no way to support finally.
 
 
 ## catch 
-
+[![GoDoc](https://godoc.org/github.com/fzerorubigd/block/catch?status.svg)](https://godoc.org/github.com/fzerorubigd/block/catch)
 catch is the reverse try/catch/finally. first setup all Catch and Finally blocks and the call Try. 
 
 ```go
